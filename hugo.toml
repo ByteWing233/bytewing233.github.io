@@ -1,0 +1,25 @@
+# --- 最终配置文件 ---
+
+# 1. 基础信息 (请修改为你自己的)
+baseURL = "https://bytewing233.github.io/"
+languageCode = "zh-cn"
+defaultContentLanguage = "zh-cn"
+title = "ByteWing's Blog"
+
+theme = "chirpy"
+
+# 3. 启用 Git Info (我们稍后会创建 commit)
+enableGitInfo = true
+hasCJKLanguage = true # 支持中文搜索
+
+# 7. 其他高级配置 (保持不变即可)
+[outputs]
+  home = ["HTML", "RSS", "JSON"] # 为搜索功能生成 JSON
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+[markup.goldmark.renderer]
+  unsafe = true # 允许在 Markdown 中使用原始 HTML
+[markup.tableOfContents]
+  startLevel = 2
+  endLevel = 4
