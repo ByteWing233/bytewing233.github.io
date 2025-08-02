@@ -10,6 +10,6 @@
   languageName = "中文"
   languageCode = "zh-CN"
   weight = 1
-  title = "Chirpy"
+  title = "ByteWing"
   [zh-CN.params]
     tagline = "一个专注于文本的博客主题"

@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # 我们使用一个更新的 Hugo 版本，因为它与你内化的 v2 主题更兼容
-      HUGO_VERSION: 0.125.4 
+      HUGO_VERSION: 0.128.2
       DART_SASS_VERSION: 1.77.0
     steps:
       # 步骤 1: 安装 Hugo
