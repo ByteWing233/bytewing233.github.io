@@ -19,47 +19,40 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.120.4
+      # 我们使用一个更新的 Hugo 版本，因为它与你内化的 v2 主题更兼容
+      HUGO_VERSION: 0.125.4 
       DART_SASS_VERSION: 1.77.0
     steps:
+      # 步骤 1: 安装 Hugo
       - name: Install Hugo CLI
         run: |
           wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
       
-      # 关键修复：使用 GitHub Actions 的标准方式将 Sass 添加到 PATH
+      # 步骤 2: 安装 Dart Sass
       - name: Install Dart Sass
         run: |
-          # 下载和解压步骤保持不变
           wget -O ${{ runner.temp }}/dart-sass.tar.gz https://github.com/sass/dart-sass/releases/download/${{ env.DART_SASS_VERSION }}/dart-sass-${{ env.DART_SASS_VERSION }}-linux-x64.tar.gz
           tar -xf ${{ runner.temp }}/dart-sass.tar.gz -C ${{ runner.temp }}
-          # 这是官方且保证有效的方法
           echo "${{ runner.temp }}/dart-sass" >> $GITHUB_PATH
           
+      # 步骤 3: Checkout 你的代码（包括 themes 文件夹）
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: recursive
-          fetch-depth: 0
+          submodules: true # 保留这个是个好习惯
 
-      - name: Install Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: '^1.20'
-
-      - name: Install Dependencies
-        run: hugo mod get -u
-
+      # 步骤 4: 设置 GitHub Pages
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
 
+      # 步骤 5: 构建网站
       - name: Build with Hugo
-        env:
-          HUGO_ENVIRONMENT: production
-          HUGO_ENV: production
+        # 注意：run: hugo 后面不再需要复杂的参数，因为 Setup Pages 会处理
         run: hugo
 
+      # 步骤 6: 上传构建产物
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
