@@ -1,30 +1,30 @@
 toc = true
-avatar = "img/commons/avatar.jpg"
-author = "yifan"
+avatar = "img/commons/logo.jpeg"
+author = "XiangZ"
 
 [assets]
   self_host = false
 
 [social]
-  name = "Yifan"
-  url = "https://github.com/geekifan"
+  name = "XiangZ"
+  url = "https://github.com/ByteWing233"
 
 [[social.links]]
   type = "github"
-  id = "yourusername"  # 或直接使用 url = "https://github.com/yourusername"
+  id = "ByteWing233"  # 或直接使用 url = "https://github.com/yourusername"
   icon = "fab fa-github"
 
-[[social.links]]
-  type = "twitter"
-  id = "yourhandle"
-  icon = "fab fa-twitter"
+#[[social.links]]
+#  type = "twitter"
+#  id = "yourhandle"
+#  icon = "fab fa-twitter"
 
 [[social.links]]
   type = "email"
-  id = "your.email@example.com"  # 会被自动分割处理
+  id = "herbsttag123@gmail.com"  # 会被自动分割处理
   icon = "fas fa-envelope"
 
-[[social.links]]
-  type = "rss"
-  icon = "fas fa-rss"
-  noblank = true  # 不在新窗口打开
+#[[social.links]]
+#  type = "rss"
+#  icon = "fas fa-rss"
+#  noblank = true  # 不在新窗口打开
