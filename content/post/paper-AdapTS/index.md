@@ -5,9 +5,12 @@ draft: false
 description: >-
   Lightweight Online Adaption for Time Series Foundation Model Forecasts
 categories:
-  - time series
+  - AI
 tags:
   - 傅里叶变换
+  - 人工智能
+  - 机器学习
+  - 时间序列
 ---
 ![alt text](figure1.png)
 { caption = "figure 1" }

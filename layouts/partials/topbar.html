@@ -1,0 +1,39 @@
+<!-- The Top Bar -->
+<header id="topbar-wrapper" class="flex-shrink-0" aria-label="Top Bar">
+  <div id="topbar" class="d-flex align-items-center justify-content-between px-lg-3 h-100">
+    <!-- 移除面包屑导航 -->
+
+    <button type="button" id="sidebar-trigger" class="btn btn-link" aria-label="Sidebar">
+      <i class="fas fa-bars fa-fw"></i>
+    </button>
+
+    <div id="topbar-title">
+      {{ $page := . }}
+      {{ if eq .Type "post" }}
+        {{ .Title }}
+      {{ else }}
+        {{ $currentMenuEntry := "" }}
+        {{ range site.Menus.main }}
+          {{ if eq .URL $page.RelPermalink }}
+            {{ $currentMenuEntry = . }}
+          {{ end }}
+        {{ end }}
+        {{ if $currentMenuEntry }}
+          {{ $currentMenuEntry.Name }}
+        {{ else }}
+          {{ .Title }}
+        {{ end }}
+      {{ end }}
+    </div>
+
+    <button type="button" id="search-trigger" class="btn btn-link" aria-label="Search">
+      <i class="fas fa-search fa-fw"></i>
+    </button>
+
+    <search id="search" class="align-items-center ms-3 ms-lg-0">
+      <i class="fas fa-search fa-fw"></i>
+      <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="{{ T "search.hint" }}">
+    </search>
+    <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">{{ T "search.cancel" }}</button>
+  </div>
+</header>

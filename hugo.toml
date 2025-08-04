@@ -22,3 +22,49 @@ hasCJKLanguage = true # 支持中文搜索
 [markup.tableOfContents]
   startLevel = 2
   endLevel = 4
+
+# 主导航菜单配置
+# 暂时隐藏首页
+# [[menu.main]]
+#   name = "首页"
+#   url = "/"
+#   weight = 1
+#   pre = "fa-home"
+
+# 主菜单配置
+[[menu.main]]
+  name = "CS/AI"
+  url = "/cs-ai/"
+  weight = 2
+  pre = "fa-microchip"
+
+[[menu.main]]
+  name = "Arts & Humanities"
+  url = "/literature/"
+  weight = 3
+  pre = "fa-feather-alt"
+
+[[menu.main]]
+  name = "分类"
+  url = "/categories/"
+  weight = 4
+  pre = "fa-stream"
+
+[[menu.main]]
+  name = "标签"
+  url = "/tags/"
+  weight = 5
+  pre = "fa-tags"
+
+[[menu.main]]
+  name = "归档"
+  url = "/archives/"
+  weight = 6
+  pre = "fa-archive"
+
+[[menu.main]]
+  name = "关于"
+  url = "/about/"
+  weight = 7
+  pre = "fa-info-circle"
+

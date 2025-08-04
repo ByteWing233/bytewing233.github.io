@@ -1,0 +1,28 @@
+{{ define "main" }}
+<div class="post">
+  <h1 class="post-title">{{ .Title }}</h1>
+  
+  {{ .Content }}
+  
+  <div class="post-list">
+    {{ range (where .Site.RegularPages "Section" "post") }}
+      {{ if intersect .Params.categories (slice "ai" "人工智能" "机器学习" "深度学习" "神经网络" "time series" "时间序列") }}
+        <article class="post-preview">
+          <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+          <p class="post-meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006年01月02日" }}</time>
+            {{ if .Params.categories }}
+              {{ range .Params.categories }}
+                <span class="category">{{ . }}</span>
+              {{ end }}
+            {{ end }}
+          </p>
+          {{ if .Summary }}
+            <p>{{ .Summary }}</p>
+          {{ end }}
+        </article>
+      {{ end }}
+    {{ end }}
+  </div>
+</div>
+{{ end }}

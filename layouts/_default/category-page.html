@@ -1,0 +1,192 @@
+{{ define "main" }}
+<div class="container">
+  <header class="category-header">
+    <h1 class="category-title">{{ .Title }}</h1>
+    <p class="category-description">{{ .Description }}</p>
+  </header>
+  
+  {{ .Content }}
+  
+  <div class="category-posts">
+    {{ $categoryFilter := "" }}
+    {{ if eq .Layout "cs" }}
+      {{ $categoryFilter = slice "cs" "计算机科学" "编程" "算法" "数据结构" "软件工程" "博客" "教程" }}
+    {{ else if eq .Layout "ai" }}
+      {{ $categoryFilter = slice "ai" "人工智能" "机器学习" "深度学习" "神经网络" "time series" "时间序列" }}
+    {{ else if eq .Layout "literature" }}
+      {{ $categoryFilter = slice "文艺" "文学" "创作" "诗歌" "小说" "散文" "艺术" "音乐" "电影" }}
+    {{ end }}
+    
+    {{ $posts := where .Site.RegularPages "Section" "post" }}
+    {{ $filteredPosts := slice }}
+    {{ range $posts }}
+      {{ if intersect .Params.categories $categoryFilter }}
+        {{ $filteredPosts = $filteredPosts | append . }}
+      {{ end }}
+    {{ end }}
+    
+    {{ if $filteredPosts }}
+      <h2 class="posts-section-title">相关文章 ({{ len $filteredPosts }} 篇)</h2>
+      <div class="posts-grid">
+        {{ range $filteredPosts }}
+          <article class="post-card">
+            <h3 class="post-card-title">
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </h3>
+            <div class="post-card-meta">
+              <time datetime="{{ .Date.Format "2006-01-02" }}">
+                {{ .Date.Format "2006年01月02日" }}
+              </time>
+              {{ if .Params.categories }}
+                <div class="post-categories">
+                  {{ range .Params.categories }}
+                    <span class="category-tag">{{ . }}</span>
+                  {{ end }}
+                </div>
+              {{ end }}
+            </div>
+            {{ if .Summary }}
+              <p class="post-card-summary">{{ .Summary | truncate 120 }}</p>
+            {{ end }}
+            {{ if .Params.tags }}
+              <div class="post-tags">
+                {{ range first 3 .Params.tags }}
+                  <span class="tag">#{{ . }}</span>
+                {{ end }}
+              </div>
+            {{ end }}
+          </article>
+        {{ end }}
+      </div>
+    {{ else }}
+      <div class="no-posts">
+        <p>暂时还没有该分类的文章，敬请期待！</p>
+      </div>
+    {{ end }}
+  </div>
+</div>
+
+<style>
+.category-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem 0;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.category-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.category-description {
+  font-size: 1.1rem;
+  color: #6c757d;
+  margin: 0;
+}
+
+.posts-section-title {
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem 0;
+  color: #495057;
+  border-left: 4px solid #007bff;
+  padding-left: 1rem;
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.post-card {
+  background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.post-card-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.post-card-title a {
+  color: #2c3e50;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.post-card-title a:hover {
+  color: #007bff;
+}
+
+.post-card-meta {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.post-categories {
+  margin-top: 0.5rem;
+}
+
+.category-tag {
+  background: #e9ecef;
+  color: #495057;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin-right: 0.5rem;
+}
+
+.post-card-summary {
+  color: #6c757d;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.post-tags {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.tag {
+  background: #f8f9fa;
+  color: #007bff;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-right: 0.5rem;
+}
+
+.no-posts {
+  text-align: center;
+  padding: 3rem 0;
+  color: #6c757d;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .posts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .category-title {
+    font-size: 2rem;
+  }
+}
+</style>
+{{ end }}
